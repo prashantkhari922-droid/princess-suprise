@@ -130,14 +130,23 @@
     <button class="btn" id="revealBtn">See My Heart 💖</button>
     <p class="note">Click here if the button doesn’t work</p>
 
-    <!-- Step 1: Pop-up Love Box -->
-    <div class="card fade" id="loveIntro" style="display:none;">
-      <div class="section-title">A little love for you 💌</div>
-      <p>Hey Love! I made something cute because I love you so much! Click below to see what I made for you 💖</p>
-      <div style="margin-top:10px;">
-        <button class="btn" id="openLetter">Open Love Letter 💌</button>
-      </div>
-    </div>
+    <button id="revealBtn">See My Heart 💖</button>
+
+<div id="loveIntro" style="display:none; margin-top:20px; font-size:20px; color:#b0005a;">
+  💌 A little love for you! <br>
+  Hey Love! I made something cute because I love you so much!
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const revealBtn = document.getElementById("revealBtn");
+    const loveIntro = document.getElementById("loveIntro");
+
+    revealBtn.addEventListener("click", function() {
+      loveIntro.style.display = "block";
+    });
+  });
+</script>
 
     <!-- Step 2: Love Letter Modal -->
     <div class="modal" id="letterModal">
@@ -402,3 +411,4 @@
   </script>
 </body>
 </html>
+
