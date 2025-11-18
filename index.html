@@ -125,7 +125,7 @@
 
   <div class="shell">
     <!-- Hero -->
-    <h1>👑 Happy Princess Day 👑</h1>
+    <h1>🫶Happy Princess Day Hanu🏩</h1>
     <p class="subtitle">Tap to Reveal</p>
     <button class="btn" id="revealBtn">See My Heart 💖</button>
     <p class="note">Click here if the button doesn’t work</p>
@@ -133,7 +133,7 @@
     <!-- Step 1: Pop-up Love Box -->
     <div class="card fade" id="loveIntro" style="display:none;">
       <div class="section-title">A little love for you 💌</div>
-      <p>Hey Love! I made something cute because I love you so much! Click below to see what I made for you 💖</p>
+      <p>Hellouu Love! I made something cute because I love you so much! Click below to see what I made for you 💖</p>
       <div style="margin-top:10px;">
         <button class="btn" id="openLetter">Open Love Letter 💌</button>
       </div>
@@ -143,7 +143,7 @@
 
 <div id="loveIntro" style="display:none; margin-top:20px; font-size:20px; color:#b0005a;">
   💌 A little love for you! <br>
-  Hey Love! I made something cute because I love you so much!
+  Hellouu Love! I made something cute because I love you so much!
 </div>
 
 <script>
@@ -175,9 +175,10 @@
     <button id="openLetter">Open Love Letter 💌</button>
 
 <div id="loveLetter" style="display:none; margin-top:20px; font-size:18px; color:#b0005a;">
-  My Dearest Love,<br>
-  You are my dream come true.<br>
-  Every moment with you is magic.<br>
+  My Princess💗,<br>
+  You are love of my life💗,.<br>
+  Reason of my every smile, My Cutiepie, My Sweetheart, My Baby, My everything💗.<br>
+  Without you my life is incomplete I LOVE YOU SO MUCH😘.<br>
   Happy Princess Day 💖
 </div>
 
@@ -456,8 +457,67 @@
       alert('💌 Letter sent to you (pretend)! You can replace this with a real link later.');
     });
   </script>
+  <button id="showComposer">Write Final Love Letter ✍</button>
+
+<div id="finalLetterBlock" style="display:none; margin-top:20px;">
+  <h3>Final Love Letter</h3>
+  
+  <label for="toName"><strong>To:</strong></label><br>
+  <input id="toName" type="text" placeholder="Your Princess" style="width:100%; padding:8px; margin:8px 0;"><br>
+  
+  <label for="finalMsg"><strong>Your Message:</strong></label><br>
+  <textarea id="finalMsg" rows="5" placeholder="You are my sunshine..." style="width:100%; padding:8px; margin:8px 0;"></textarea><br>
+  
+  <button id="sendFinal">Send Love Letter 💌</button>
+  <button id="cancelFinal">Cancel ❌</button>
+</div>
+
+<!-- Sealed Letter -->
+<div id="sealedBlock" style="display:none; margin-top:20px; border:2px solid #ffd3e8; border-radius:12px; padding:16px;">
+  <h3>Letter Sealed with Love 💖</h3>
+  <p><strong>To:</strong> <span id="sealedTo">Anonymous Yours</span></p>
+  <p><strong>From:</strong> <span id="sealedFrom">Anonymous Yours</span></p>
+  <p id="sealedBody">You are my favorite person, my sunshine, forever.</p>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const showComposer = document.getElementById("showComposer");
+    const finalLetterBlock = document.getElementById("finalLetterBlock");
+    const toName = document.getElementById("toName");
+    const finalMsg = document.getElementById("finalMsg");
+    const sendFinal = document.getElementById("sendFinal");
+    const cancelFinal = document.getElementById("cancelFinal");
+    const sealedBlock = document.getElementById("sealedBlock");
+    const sealedTo = document.getElementById("sealedTo");
+    const sealedFrom = document.getElementById("sealedFrom");
+    const sealedBody = document.getElementById("sealedBody");
+
+    // Show composer
+    showComposer.addEventListener("click", function() {
+      finalLetterBlock.style.display = "block";
+    });
+
+    // Send letter
+    sendFinal.addEventListener("click", function() {
+      const to = (toName.value || "My Princess").trim();
+      const body = (finalMsg.value || "You are my favorite person, my sunshine, forever.").trim();
+      sealedTo.textContent = to;
+      sealedFrom.textContent = "Yours, always";
+      sealedBody.textContent = body;
+      sealedBlock.style.display = "block";
+      finalLetterBlock.style.display = "none";
+    });
+
+    // Cancel composer
+    cancelFinal.addEventListener("click", function() {
+      finalLetterBlock.style.display = "none";
+    });
+  });
+</script>
 </body>
 </html>
+
 
 
 
