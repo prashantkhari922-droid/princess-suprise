@@ -230,46 +230,46 @@
   });
 </script>
     
-    <!-- Step 4: Special cards (bunny click) -->
-    <button id="showCards">Show Special Cards 🃏</button>
+     <!-- Step 5: All Messages Unlocked Modal -->
+    <button id="unlockMsgs">Unlock Messages 🔓</button>
 
-<div id="cardsBlock" style="display:none; margin-top:20px;">
-  <h3>Some Special Cards For You</h3>
-  <div style="margin-top:12px;">
-    <div style="display:inline-block; margin:10px; padding:20px; border:2px solid #ffd3e8; border-radius:12px;">
-      🐰 Bunny Love
-    </div>
-    <div style="display:inline-block; margin:10px; padding:20px; border:2px solid #ffd3e8; border-radius:12px;">
-      💖 Heart Princess
-    </div>
-    <div style="display:inline-block; margin:10px; padding:20px; border:2px solid #ffd3e8; border-radius:12px;">
-      🕷 Spidey Cute
-    </div>
+<!-- Hidden modal -->
+<div id="unlockModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4); 
+     display:flex; align-items:center; justify-content:center; z-index:100;">
+  <div style="background:#fff; border:2px solid #ffd3e8; border-radius:18px; padding:20px; max-width:400px; text-align:center;">
+    <h3>🎉 All Messages Unlocked!</h3>
+    <p>Ready to read your final love letter?</p>
+    <button id="viewMsgs">View My Messages 💌</button>
+    <button id="backHome">Back to Home 🏠</button>
   </div>
 </div>
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-    const showCards = document.getElementById("showCards");
-    const cardsBlock = document.getElementById("cardsBlock");
+    const unlockBtn = document.getElementById("unlockMsgs");
+    const unlockModal = document.getElementById("unlockModal");
+    const viewMsgs = document.getElementById("viewMsgs");
+    const backHome = document.getElementById("backHome");
 
-    showCards.addEventListener("click", function() {
-      cardsBlock.style.display = "block";
+    // Show modal
+    unlockBtn.addEventListener("click", function() {
+      unlockModal.style.display = "flex";
+    });
+
+    // Close modal and go to messages
+    viewMsgs.addEventListener("click", function() {
+      unlockModal.style.display = "none";
+      alert("Now showing your final love letter 💖"); 
+      // 👉 yahan tu apna final love letter block show karwa sakta hai
+    });
+
+    // Close modal and go back home
+    backHome.addEventListener("click", function() {
+      unlockModal.style.display = "none";
+      window.scrollTo({top:0, behavior:"smooth"});
     });
   });
 </script>
-
-    <!-- Step 5: All Messages Unlocked Modal -->
-    <div class="modal" id="unlockModal">
-      <div class="modal-card" style="text-align:center;">
-        <h3 class="modal-title">🎉 All Messages Unlocked!</h3>
-        <p>You can now view all the messages sent to you by your friends.</p>
-        <div class="modal-actions">
-          <button class="btn" id="viewMsgs">View My Messages</button>
-          <button class="btn secondary" id="backHome">Back to Home</button>
-        </div>
-      </div>
-    </div>
 
     <!-- Step 6: Final Love Letter composer -->
     <div class="card fade" id="finalLetterBlock" style="display:none;">
@@ -458,6 +458,7 @@
   </script>
 </body>
 </html>
+
 
 
 
