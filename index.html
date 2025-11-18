@@ -231,27 +231,33 @@
 </script>
     
     <!-- Step 4: Special cards (bunny click) -->
-    <div class="card fade" id="cardsBlock" style="display:none;">
-      <div class="section-title">Some Special Cards For You</div>
-      <p class="helper">Click the bunny to get your card</p>
-      <div class="bunnies">
-        <div>
-          <div class="bunny" id="bunny1">🐰</div>
-          <div class="bunny-label">Bunny Heart</div>
-        </div>
-        <div>
-          <div class="bunny" id="bunny2">💖</div>
-          <div class="bunny-label">Hello Kitty Love</div>
-        </div>
-        <div>
-          <div class="bunny" id="bunny3">🕷</div>
-          <div class="bunny-label">Kitty x Spidey</div>
-        </div>
-      </div>
-      <div style="margin-top:14px;">
-        <button class="btn" id="unlockMsgs">Unlock Messages</button>
-      </div>
+    <button id="showCards">Show Special Cards 🃏</button>
+
+<div id="cardsBlock" style="display:none; margin-top:20px;">
+  <h3>Some Special Cards For You</h3>
+  <div style="margin-top:12px;">
+    <div style="display:inline-block; margin:10px; padding:20px; border:2px solid #ffd3e8; border-radius:12px;">
+      🐰 Bunny Love
     </div>
+    <div style="display:inline-block; margin:10px; padding:20px; border:2px solid #ffd3e8; border-radius:12px;">
+      💖 Heart Princess
+    </div>
+    <div style="display:inline-block; margin:10px; padding:20px; border:2px solid #ffd3e8; border-radius:12px;">
+      🕷 Spidey Cute
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const showCards = document.getElementById("showCards");
+    const cardsBlock = document.getElementById("cardsBlock");
+
+    showCards.addEventListener("click", function() {
+      cardsBlock.style.display = "block";
+    });
+  });
+</script>
 
     <!-- Step 5: All Messages Unlocked Modal -->
     <div class="modal" id="unlockModal">
@@ -452,6 +458,7 @@
   </script>
 </body>
 </html>
+
 
 
 
