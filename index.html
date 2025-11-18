@@ -391,8 +391,19 @@
     sendToMe.addEventListener('click', ()=>{
       alert('💌 Letter sent to you (pretend)! You can replace this with a real link later.');
     });
-  </script>
+  <script>
+  const revealBtn = document.getElementById('revealBtn');
+  const loveIntro = document.getElementById('loveIntro');
+
+  revealBtn.addEventListener('click', () => {
+    loveIntro.style.display = 'block';   // show hidden card
+    loveIntro.scrollIntoView({behavior:'smooth', block:'center'}); // scroll to it
+  });
+</script>
+</body>
+</html>
 </body>
 
 </html>
+
 
