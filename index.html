@@ -193,30 +193,32 @@
 </script>
     
     <!-- Step 3: Playlist selector -->
-    <div class="card fade" id="playlistBlock" style="display:none;">
-      <div class="section-title">A Dedicated Playlist For You</div>
-      <p class="helper">Choose 1 track to start with.</p>
-      <div class="grid">
-        <div class="playlist-card">
-          <div class="pl-art sunset">🌴 Dancing Under The Sun</div>
-          <div class="pl-title">Warm sunset vibes, smile guaranteed.</div>
-          <button class="btn secondary play" data-url="https://open.spotify.com/track/your-sunset">Play this</button>
-        </div>
-        <div class="playlist-card">
-          <div class="pl-art mono">🎧 The World Is Mine</div>
-          <div class="pl-title">Headphones on, heart full.</div>
-          <button class="btn secondary play" data-url="https://open.spotify.com/track/your-world">Play this</button>
-        </div>
-        <div class="playlist-card">
-          <div class="pl-art roller">💫 Life Is A Roller Coaster</div>
-          <div class="pl-title">Hold my hand, enjoy the ride.</div>
-          <button class="btn secondary play" data-url="https://open.spotify.com/track/your-roller">Play this</button>
-        </div>
-      </div>
-      <div style="margin-top:14px;">
-        <button class="btn" id="toCards">Continue to Step 2</button>
-      </div>
-    </div>
+    <button id="showPlaylist">Show Playlist 🎶</button>
+
+<div id="playlistBlock" style="display:none; margin-top:20px;">
+  <h3>A Dedicated Playlist For You</h3>
+
+  <!-- Song 1 -->
+  <button onclick="window.open('https://music.youtube.com/watch?v=sNojVK51UQ0&list=RDAMVM7bDYfNlkO8U','_blank')">
+    💖 You Will Be My Girl
+  </button><br><br>
+
+  <!-- Song 2 -->
+  <button onclick="window.open('https://music.youtube.com/watch?v=l6nu6wcEImI&list=OLAK5uy_mqtkskflldQ98Kd4lsnxaXTZF_i-sq3YM','_blank')">
+    👑 Princess Song
+  </button>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const showPlaylist = document.getElementById("showPlaylist");
+    const playlistBlock = document.getElementById("playlistBlock");
+
+    showPlaylist.addEventListener("click", function() {
+      playlistBlock.style.display = "block";
+    });
+  });
+</script>
 
     <!-- Step 4: Special cards (bunny click) -->
     <div class="card fade" id="cardsBlock" style="display:none;">
@@ -440,6 +442,7 @@
   </script>
 </body>
 </html>
+
 
 
 
