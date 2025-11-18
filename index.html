@@ -172,6 +172,17 @@
       </div>
     </div>
 
+    <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const openLetter = document.getElementById("openLetter");
+    const loveLetter = document.getElementById("loveLetter");
+
+    openLetter.addEventListener("click", function() {
+      loveLetter.style.display = "block";
+    });
+  });
+</script>
+
     <!-- Step 3: Playlist selector -->
     <div class="card fade" id="playlistBlock" style="display:none;">
       <div class="section-title">A Dedicated Playlist For You</div>
@@ -420,5 +431,6 @@
   </script>
 </body>
 </html>
+
 
 
