@@ -5,166 +5,400 @@
   <title>Princess Day Surprise</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    body {
+    :root{
+      --pink:#ff4fa3;
+      --soft:#ffeef5;
+      --softer:#fff6fb;
+      --lav:#c7a4ff;
+      --yellow:#ffd98e;
+      --cloud:#fff;
+      --text:#b0005a;
+    }
+    *{box-sizing:border-box}
+    body{
       margin:0; padding:40px 18px;
-      font-family: 'Poppins', sans-serif;
-      background: radial-gradient(1200px at 10% 10%, #ffeef5, #fff6fb);
-      color:#b0005a; text-align:center;
+      font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: radial-gradient(1200px at 10% 10%, var(--soft), var(--softer));
+      color:var(--text); text-align:center;
     }
-    h1 {color:#ff4fa3;}
-    .btn {
-      background:#ff4fa3; color:#fff; border:none;
+    .shell{
+      max-width:880px; margin:0 auto;
+    }
+    h1{margin:0 0 16px; font-size:34px; color:var(--pink)}
+    .subtitle{color:#9a3669; margin-bottom:22px}
+
+    /* Cute background sprinkles */
+    .sprinkle{position:fixed; opacity:.18; font-size:18px; pointer-events:none}
+    .sprinkle.s1{top:18px; left:18px} .sprinkle.s2{top:22%; right:12%}
+    .sprinkle.s3{bottom:10%; left:8%} .sprinkle.s4{bottom:4%; right:6%}
+    .sprinkle span{margin:0 8px}
+
+    /* Buttons */
+    .btn{
+      background:var(--pink); color:#fff; border:none;
       padding:14px 22px; border-radius:28px; font-weight:600;
-      cursor:pointer; margin:8px;
+      box-shadow:0 8px 20px rgba(255,79,163,.25);
+      cursor:pointer; transition:transform .15s ease, box-shadow .2s ease;
     }
-    .btn.secondary {background:#fff; color:#ff4fa3; border:2px solid #ff4fa3;}
-    .card {
+    .btn:hover{transform:translateY(-2px)}
+    .btn.secondary{background:#fff; color:var(--pink); border:2px solid var(--pink)}
+    .note{font-size:13px; color:#8c3a66; margin-top:8px}
+
+    /* Cards & sections */
+    .card{
       background:#fff; border:2px solid #ffd3e8; border-radius:20px;
+      box-shadow:0 10px 24px rgba(255,79,163,.12);
       padding:20px; margin:18px 0;
     }
-    .modal {
+    .grid{display:grid; gap:16px; grid-template-columns:repeat(3,1fr)}
+    @media (max-width:780px){.grid{grid-template-columns:1fr}}
+    .playlist-card{
+      background:linear-gradient(140deg, #fff, #fff7fb);
+      border:2px dashed #ffc4e0; border-radius:18px; padding:18px;
+      height:180px; display:flex; flex-direction:column; justify-content:space-between;
+    }
+    .pl-title{font-weight:700; color:#7a2c5e}
+    .pl-art{height:100px; border-radius:12px; display:flex; align-items:center; justify-content:center;
+      color:#fff; font-weight:700}
+    .sunset{background:linear-gradient(135deg,#ff9f7b,#ffd07f)}
+    .mono{background:linear-gradient(135deg,#808080,#bdbdbd)}
+    .roller{background:linear-gradient(135deg,#ff88cc,#ffcc66)}
+    .section-title{font-weight:700; color:#7a2c5e; margin-bottom:10px}
+
+    /* Modal */
+    .modal{
       position:fixed; inset:0; background:rgba(0,0,0,.35);
-      display:none; align-items:center; justify-content:center; z-index:50;
+      display:none; align-items:center; justify-content:center; z-index:50; padding:18px;
     }
-    .modal.open {display:flex;}
-    .modal-card {
+    .modal.open{display:flex}
+    .modal-card{
       background:#fff; border-radius:22px; border:2px solid #ffd3e8;
-      max-width:600px; width:100%; padding:24px;
+      max-width:680px; width:100%; padding:24px; text-align:left;
+      box-shadow:0 14px 34px rgba(0,0,0,.2);
     }
-    .letter {border:2px solid #ffc9e4; border-radius:20px; padding:18px;}
-    .playlist-card {border:2px dashed #ffc4e0; border-radius:18px; padding:18px; margin:10px;}
-    .bunny {width:80px; height:80px; border:2px solid #ffd3e8; border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:34px; cursor:pointer;}
-    .confetti {position:fixed; inset:0; pointer-events:none; z-index:99;}
+    .modal-title{color:var(--pink); font-weight:800; margin:0 0 10px; text-align:center}
+    .modal-actions{display:flex; gap:12px; justify-content:center; margin-top:16px}
+
+    /* Love letter layout */
+    .letter{
+      background:linear-gradient(180deg,#fff,#fff7fc);
+      border:2px solid #ffc9e4; border-radius:20px; padding:18px;
+      position:relative; min-height:180px;
+    }
+    .corner-cat{
+      position:absolute; top:-12px; right:-12px;
+      background:#ffeef5; border:2px solid #ffc9e4; border-radius:14px;
+      padding:8px 10px; font-size:14px; color:#7a2c5e;
+      box-shadow:0 6px 16px rgba(255,79,163,.15);
+    }
+
+    /* Bunny row */
+    .bunnies{display:flex; gap:18px; justify-content:center; flex-wrap:wrap; margin-top:10px}
+    .bunny{
+      width:98px; height:98px; border-radius:16px; background:#fff; border:2px solid #ffd3e8;
+      display:flex; align-items:center; justify-content:center; font-size:34px;
+      cursor:pointer; transition:transform .15s ease;
+    }
+    .bunny:hover{transform:translateY(-2px)}
+    .bunny-label{font-size:13px; color:#7a2c5e; margin-top:6px; text-align:center}
+
+    /* Confetti canvas */
+    .confetti{position:fixed; inset:0; pointer-events:none; z-index:99}
+
+    /* Typewriter effect */
+    .type{overflow:hidden; white-space:pre-wrap}
+    .fade{animation:fadeIn .8s ease forwards}
+    @keyframes fadeIn{from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:none}}
+
+    /* Tiny helper text */
+    .helper{font-size:12px; color:#8a3b68; margin-top:6px}
   </style>
 </head>
 <body>
+  <!-- cute sprinkles -->
+  <div class="sprinkle s1"><span>⭐</span><span>☁</span><span>💖</span></div>
+  <div class="sprinkle s2"><span>✨</span><span>🌸</span><span>💫</span></div>
+  <div class="sprinkle s3"><span>💝</span><span>⭐</span><span>☁</span></div>
+  <div class="sprinkle s4"><span>🌈</span><span>💞</span><span>✨</span></div>
+
   <canvas id="confetti" class="confetti"></canvas>
 
-  <h1>👑 Happy Princess Day 👑</h1>
-  <button class="btn" id="revealBtn">See My Heart 💖</button>
+  <div class="shell">
+    <!-- Hero -->
+    <h1>👑 Happy Princess Day 👑</h1>
+    <p class="subtitle">Tap to Reveal</p>
+    <button class="btn" id="revealBtn">See My Heart 💖</button>
+    <p class="note">Click here if the button doesn’t work</p>
 
-  <!-- Love Intro -->
-  <div class="card" id="loveIntro" style="display:none;">
-    <h3>A little love for you 💌</h3>
-    <p>Hey Love! I made something cute because I love you so much! Click below to see what I made for you 💖</p>
-    <button class="btn" id="openLetter">Open Love Letter 💌</button>
-  </div>
+    <!-- Step 1: Pop-up Love Box -->
+    <div class="card fade" id="loveIntro" style="display:none;">
+      <div class="section-title">A little love for you 💌</div>
+      <p>Hey Love! I made something cute because I love you so much! Click below to see what I made for you 💖</p>
+      <div style="margin-top:10px;">
+        <button class="btn" id="openLetter">Open Love Letter 💌</button>
+      </div>
+    </div>
 
-  <!-- Love Letter Modal -->
-  <div class="modal" id="letterModal">
-    <div class="modal-card">
-      <h3>A Love Letter to My Dearest Love</h3>
-      <div class="letter" id="letterText"></div>
-      <button class="btn" id="closeLetter">Close</button>
-      <button class="btn secondary" id="nextPlaylist">Continue → Playlist</button>
+    <!-- Step 2: Love Letter Modal -->
+    <div class="modal" id="letterModal">
+      <div class="modal-card">
+        <h3 class="modal-title">A Love Letter to My Dearest Love</h3>
+        <div class="letter">
+          <div class="corner-cat">🐱 meow ~</div>
+          <div id="letterText" class="type"></div>
+        </div>
+        <div class="modal-actions">
+          <button class="btn" id="closeLetter">Close</button>
+          <button class="btn secondary" id="nextPlaylist">Continue → Playlist</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3: Playlist selector -->
+    <div class="card fade" id="playlistBlock" style="display:none;">
+      <div class="section-title">A Dedicated Playlist For You</div>
+      <p class="helper">Choose 1 track to start with.</p>
+      <div class="grid">
+        <div class="playlist-card">
+          <div class="pl-art sunset">🌴 Dancing Under The Sun</div>
+          <div class="pl-title">Warm sunset vibes, smile guaranteed.</div>
+          <button class="btn secondary play" data-url="https://open.spotify.com/track/your-sunset">Play this</button>
+        </div>
+        <div class="playlist-card">
+          <div class="pl-art mono">🎧 The World Is Mine</div>
+          <div class="pl-title">Headphones on, heart full.</div>
+          <button class="btn secondary play" data-url="https://open.spotify.com/track/your-world">Play this</button>
+        </div>
+        <div class="playlist-card">
+          <div class="pl-art roller">💫 Life Is A Roller Coaster</div>
+          <div class="pl-title">Hold my hand, enjoy the ride.</div>
+          <button class="btn secondary play" data-url="https://open.spotify.com/track/your-roller">Play this</button>
+        </div>
+      </div>
+      <div style="margin-top:14px;">
+        <button class="btn" id="toCards">Continue to Step 2</button>
+      </div>
+    </div>
+
+    <!-- Step 4: Special cards (bunny click) -->
+    <div class="card fade" id="cardsBlock" style="display:none;">
+      <div class="section-title">Some Special Cards For You</div>
+      <p class="helper">Click the bunny to get your card</p>
+      <div class="bunnies">
+        <div>
+          <div class="bunny" id="bunny1">🐰</div>
+          <div class="bunny-label">Bunny Heart</div>
+        </div>
+        <div>
+          <div class="bunny" id="bunny2">💖</div>
+          <div class="bunny-label">Hello Kitty Love</div>
+        </div>
+        <div>
+          <div class="bunny" id="bunny3">🕷</div>
+          <div class="bunny-label">Kitty x Spidey</div>
+        </div>
+      </div>
+      <div style="margin-top:14px;">
+        <button class="btn" id="unlockMsgs">Unlock Messages</button>
+      </div>
+    </div>
+
+    <!-- Step 5: All Messages Unlocked Modal -->
+    <div class="modal" id="unlockModal">
+      <div class="modal-card" style="text-align:center;">
+        <h3 class="modal-title">🎉 All Messages Unlocked!</h3>
+        <p>You can now view all the messages sent to you by your friends.</p>
+        <div class="modal-actions">
+          <button class="btn" id="viewMsgs">View My Messages</button>
+          <button class="btn secondary" id="backHome">Back to Home</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 6: Final Love Letter composer -->
+    <div class="card fade" id="finalLetterBlock" style="display:none;">
+      <div class="section-title">Final Love Letter</div>
+      <p class="helper">Fill this little note and send 💌</p>
+      <div class="letter">
+        <label style="display:block; margin-bottom:8px; color:#7a2c5e;">To:</label>
+        <input id="toName" type="text" placeholder="Your Princess" style="width:100%; padding:12px; border-radius:12px; border:2px solid #ffd3e8; margin-bottom:10px;">
+        <label style="display:block; margin-bottom:8px; color:#7a2c5e;">Message:</label>
+        <textarea id="finalMsg" rows="5" placeholder="You are my sunshine..." style="width:100%; padding:12px; border-radius:12px; border:2px solid #ffd3e8;"></textarea>
+        <div class="modal-actions" style="justify-content:flex-start;">
+          <button class="btn" id="sendFinal">Send Love Letter</button>
+          <button class="btn secondary" id="cancelFinal">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 7: Letter Sealed with Love screen -->
+    <div class="card fade" id="sealedBlock" style="display:none;">
+      <div class="section-title">Letter Sealed with Love</div>
+      <p class="helper">This is a love letter sealed with love.</p>
+      <div class="letter">
+        <div class="corner-cat">💌 sealed</div>
+        <p><strong>To:</strong> <span id="sealedTo">Anonymous Yours</span></p>
+        <p><strong>From:</strong> <span id="sealedFrom">Anonymous Yours</span></p>
+        <p style="margin-top:10px;"><span id="sealedBody">You are my favorite person, my sunshine, forever.</span></p>
+      </div>
+      <div class="modal-actions">
+        <button class="btn" id="genAgain">Generate Again</button>
+        <button class="btn secondary" id="sendToMe">Send a letter to me</button>
+      </div>
     </div>
   </div>
 
-  <!-- Playlist -->
-  <div class="card" id="playlistBlock" style="display:none;">
-    <h3>A Dedicated Playlist For You</h3>
-    <div class="playlist-card">
-      🌴 Dancing Under The Sun<br>
-      <button class="btn secondary play" data-url="https://open.spotify.com/track/your-sunset">Play this</button>
-    </div>
-    <div class="playlist-card">
-      🎧 The World Is Mine<br>
-      <button class="btn secondary play" data-url="https://open.spotify.com/track/your-world">Play this</button>
-    </div>
-    <div class="playlist-card">
-      💫 Life Is A Roller Coaster<br>
-      <button class="btn secondary play" data-url="https://open.spotify.com/track/your-roller">Play this</button>
-    </div>
-    <button class="btn" id="toCards">Continue to Step 2</button>
-  </div>
+  <script>
+    // Confetti
+    function confettiBurst(duration=1200){
+      const canvas = document.getElementById('confetti');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+      let pieces = Array.from({length:150},()=>({
+        x: Math.random()*canvas.width,
+        y: -Math.random()*canvas.height,
+        r: Math.random()*6+3,
+        d: Math.random()*3+2,
+        color: hsl(${Math.random()*360},100%,85%)
+      }));
+      let start = performance.now();
+      function draw(now){
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        pieces.forEach(p=>{
+          ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+          ctx.fillStyle=p.color; ctx.fill();
+          p.y+=p.d; if(p.y>canvas.height){p.y=-10; p.x=Math.random()*canvas.width;}
+        });
+        if(now-start<duration) requestAnimationFrame(draw);
+        else ctx.clearRect(0,0,canvas.width,canvas.height);
+      }
+      requestAnimationFrame(draw);
+    }
 
-  <!-- Bunny Cards -->
-  <div class="card" id="cardsBlock" style="display:none;">
-    <h3>Some Special Cards For You</h3>
-    <div class="bunny" id="bunny1">🐰</div>
-    <div class="bunny" id="bunny2">💖</div>
-    <div class="bunny" id="bunny3">🕷</div>
-    <button class="btn" id="unlockMsgs">Unlock Messages</button>
-  </div>
+    // Typewriter letter
+    const letterContent = "My Dearest Love,\nI never knew what love was, but you truly are a beautiful dream — one I never want to wake from.\nEvery moment with you is a treasure. You are my light, my heart, my soul.\nThank you for being you. I love you more than words.\nHappy Princess Day, my love. 💖";
 
-  <!-- Unlock Modal -->
-  <div class="modal" id="unlockModal">
-    <div class="modal-card">
-      <h3>🎉 All Messages Unlocked!</h3>
-      <button class="btn" id="viewMsgs">View My Messages</button>
-      <button class="btn secondary" id="backHome">Back to Home</button>
-    </div>
-  </div>
+    function typeLetter(el, text, speed=22){
+      el.textContent="";
+      let i=0;
+      function step(){
+        el.textContent += text[i];
+        i++;
+        if(i<text.length) setTimeout(step, (text[i-1]==="\n")?200:speed);
+      }
+      step();
+    }
 
-  <!-- Final Love Letter -->
-  <div class="card" id="finalLetterBlock" style="display:none;">
-    <h3>Final Love Letter</h3>
-    <input id="toName" type="text" placeholder="Your Princess"><br><br>
-    <textarea id="finalMsg" rows="5" placeholder="You are my sunshine..."></textarea><br>
-    <button class="btn" id="sendFinal">Send Love Letter</button>
-    <button class="btn secondary" id="cancelFinal">Cancel</button>
-  </div>
+    // Elements
+    const revealBtn = document.getElementById('revealBtn');
+    const loveIntro = document.getElementById('loveIntro');
+    const openLetter = document.getElementById('openLetter');
+    const letterModal = document.getElementById('letterModal');
+    const letterText = document.getElementById('letterText');
+    const closeLetter = document.getElementById('closeLetter');
+    const nextPlaylist = document.getElementById('nextPlaylist');
+    const playlistBlock = document.getElementById('playlistBlock');
+    const toCards = document.getElementById('toCards');
+    const cardsBlock = document.getElementById('cardsBlock');
+    const unlockModal = document.getElementById('unlockModal');
+    const unlockMsgs = document.getElementById('unlockMsgs');
+    const viewMsgs = document.getElementById('viewMsgs');
+    const backHome = document.getElementById('backHome');
+    const finalLetterBlock = document.getElementById('finalLetterBlock');
+    const sendFinal = document.getElementById('sendFinal');
+    const cancelFinal = document.getElementById('cancelFinal');
+    const sealedBlock = document.getElementById('sealedBlock');
+    const sealedTo = document.getElementById('sealedTo');
+    const sealedFrom = document.getElementById('sealedFrom');
+    const sealedBody = document.getElementById('sealedBody');
+    const genAgain = document.getElementById('genAgain');
+    const sendToMe = document.getElementById('sendToMe');
 
-  <!-- Sealed Letter -->
-  <div class="card" id="sealedBlock" style="display:none;">
-    <h3>Letter Sealed with Love</h3>
-    <p><strong>To:</strong> <span id="sealedTo">Anonymous Yours</span></p>
-    <p><strong>From:</strong> <span id="sealedFrom">Anonymous Yours</span></p>
-    <p><span id="sealedBody">You are my favorite person, my sunshine, forever.</span></p>
-    <button class="btn" id="genAgain">Generate Again</button>
-    <button class="btn secondary" id="sendToMe">Send a letter to me</button>
-  </div>
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  // Confetti
-  function confettiBurst(duration=1200){
-    const canvas = document.getElementById('confetti');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-    let pieces = Array.from({length:100},()=>({
-      x: Math.random()*canvas.width,
-      y: -Math.random()*canvas.height,
-      r: Math.random()*6+3,
-      d: Math.random()*3+2,
-      color: hsl(${Math.random()*360},100%,85%)
-    }));
-    let start = performance.now();
-    function draw(now){
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      pieces.forEach(p=>{
-        ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fillStyle=p.color; ctx.fill();
-        p.y+=p.d; if(p.y>canvas.height){p.y=-10; p.x=Math.random()*canvas.width;}
+    // Bunny clicks (just playful feedback)
+    ['bunny1','bunny2','bunny3'].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el) el.addEventListener('click', ()=>{
+        confettiBurst(800);
+        el.style.transform='scale(1.05)';
+        setTimeout(()=>el.style.transform='',300);
       });
-      if(now-start<duration) requestAnimationFrame(draw);
-      else ctx.clearRect(0,0,canvas.width,canvas.height);
-    }
-    requestAnimationFrame(draw);
-  }
+    });
 
-  // Typewriter
-  const letterContent = "My Dearest Love,\nYou are my dream come true.\nEvery moment with you is magic.\nHappy Princess Day 💖";
-  function typeLetter(el, text, speed=22){
-    el.textContent=""; let i=0;
-    function step(){
-      el.textContent += text[i];
-      i++;
-      if(i<text.length) setTimeout(step, (text[i-1]==="\n")?200:speed);
-    }
-    step();
-  }
+    // Flow
+    revealBtn.addEventListener('click', ()=>{
+      confettiBurst();
+      loveIntro.style.display='block';
+      loveIntro.scrollIntoView({behavior:'smooth', block:'center'});
+    });
 
-  // Elements
-  const revealBtn=document.getElementById('revealBtn');
-  const loveIntro=document.getElementById('loveIntro');
-  const openLetter=document.getElementById('openLetter');
-  const letterModal=document.getElementById('letterModal');
-  const letterText=document.getElementById('letterText');
-  const closeLetter=document.getElementById('closeLetter');
-  const nextPlaylist=document.getElementById('nextPlaylist');
-  const playlistBlock=document.getElementById('playlistBlock');
-  const toCards=document.getElementById('toCards');
-  const cardsBlock=document.getElementById('cardsBlock');
-  const unlockModal=document.getElementById('unlockModal');
-  const unlockMsgs
+    openLetter.addEventListener('click', ()=>{
+      letterModal.classList.add('open');
+      typeLetter(letterText, letterContent, 18);
+    });
+
+    closeLetter.addEventListener('click', ()=>{
+      letterModal.classList.remove('open');
+    });
+
+    nextPlaylist.addEventListener('click', ()=>{
+      letterModal.classList.remove('open');
+      playlistBlock.style.display='block';
+      playlistBlock.scrollIntoView({behavior:'smooth', block:'center'});
+    });
+
+    // Play buttons open links in new tab
+    document.querySelectorAll('.play').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const url=btn.getAttribute('data-url');
+        if(url) window.open(url, '_blank');
+      });
+    });
+
+    toCards.addEventListener('click', ()=>{
+      cardsBlock.style.display='block';
+      cardsBlock.scrollIntoView({behavior:'smooth', block:'center'});
+    });
+
+    unlockMsgs.addEventListener('click', ()=>{
+      unlockModal.classList.add('open');
+      confettiBurst();
+    });
+
+    backHome.addEventListener('click', ()=>{
+      unlockModal.classList.remove('open');
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+
+    viewMsgs.addEventListener('click', ()=>{
+      unlockModal.classList.remove('open');
+      finalLetterBlock.style.display='block';
+      finalLetterBlock.scrollIntoView({behavior:'smooth', block:'center'});
+    });
+
+    // Final letter
+    sendFinal.addEventListener('click', ()=>{
+      const to = (document.getElementById('toName').value || 'My Sweetest Love').trim();
+      const body = (document.getElementById('finalMsg').value || 'You are my sunshine. Sending you all the love in the world.').trim();
+      sealedTo.textContent = to;
+      sealedFrom.textContent = 'BigLove_Sugar';
+      sealedBody.textContent = body;
+      sealedBlock.style.display='block';
+      sealedBlock.scrollIntoView({behavior:'smooth', block:'center'});
+      confettiBurst(1200);
+    });
+
+    cancelFinal.addEventListener('click', ()=>{
+      finalLetterBlock.style.display='none';
+    });
+
+    // Sealed actions
+    genAgain.addEventListener('click', ()=>{
+      finalLetterBlock.style.display='block';
+      finalLetterBlock.scrollIntoView({behavior:'smooth', block:'center'});
+    });
+    sendToMe.addEventListener('click', ()=>{
+      alert('💌 Letter sent to you (pretend)! You can replace this with a real link later.');
+    });
+  </script>
+</body>
+</html>
